@@ -42,6 +42,8 @@ export function searchArtworks(query) {
 	 */
 	const requestUrl = `./ARTWORKS_SEARCH_RESULT.json`;
 
+	console.log(requestUrl);
+
 	/**
 	 * We know the API serves JSON data, but
 	 * it's a good idea to explicitly request JSON anyway.

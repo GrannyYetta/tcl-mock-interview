@@ -1,13 +1,15 @@
 import { useState } from 'react';
-
 import { searchArtworks } from '../api';
-
 import { Footer } from './Footer';
+import { ImageDetails } from './ImageDetailsPage';
 import { SearchForm } from './SearchForm';
 
 import './App.css';
 
 export function App() {
+	const [artwork, setArtwork] = useState([]);
+	const [selectedArtwork, setSelectedArtwork] = useState(null);
+
 	function onSearchSubmit(query) {
 		// Search for the users's query.
 		// TODO: render the results, instead of logging them to the console.
@@ -15,15 +17,32 @@ export function App() {
 		// don't make too many requests to the API! Once we've built out
 		// our UI, we need to make real requests!
 		// @see: ./src/api.js
-		searchArtworks(query).then((json) => {
-			console.log(json);
+		searchArtworks(query).then((data) => {
+			setArtwork(json.data || []).catch((err) => {
+				console.error(err);
+			});
 		});
+	}
+
+	function handleArtworkClick(data) {
+		setSelectedArtwork(data);
+	}
+
+	function handleBackClick() {
+		setSelectedArtwork(null);
 	}
 
 	return (
 		<div className="App">
 			<h1>TCL Career Lab Art Finder</h1>
+
 			<SearchForm onSearchSubmit={onSearchSubmit} />
+
+			<ImageDetails
+				selectedArtwork={selectedArtwork}
+				onBackClick={handleBackClick}
+			/>
+
 			<Footer />
 		</div>
 	);
