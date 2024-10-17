@@ -38,10 +38,20 @@ export function App() {
 
 			<SearchForm onSearchSubmit={onSearchSubmit} />
 
-			<ImageDetails
-				selectedArtwork={selectedArtwork}
-				onBackClick={handleBackClick}
-			/>
+			{selectedArtwork ? (
+				<ImageDetails
+					selectedArtwork={selectedArtwork}
+					onBackClick={handleBackClick}
+				/>
+			) : (
+				<ul>
+					<li key={data.image_id}>
+						{data.title} by{' '}
+						{data.artist_title ? data.artist_title : 'Unknown author'}
+						<button onClick={handleArtworkClick}>Select</button>
+					</li>
+				</ul>
+			)}
 
 			<Footer />
 		</div>
