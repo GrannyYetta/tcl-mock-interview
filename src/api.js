@@ -41,7 +41,7 @@ export function searchArtworks(query) {
 	 * as described in README.md.
 	 * https://api.artic.edu/api/v1/artworks/search?q={USER_QUERY}&query[term][is_public_domain]=true&fields=artist_title,date_display,image_id,thumbnail.alt_text,thumbnail.width,thumbnail.height,title
 	 */
-	const requestUrl = `./ARTWORKS_SEARCH_RESULT.json`;
+	const requestUrl = `https://api.artic.edu/api/v1/artworks/search?q=${query}`;
 
 	console.log(requestUrl);
 
